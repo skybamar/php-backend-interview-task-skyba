@@ -14,6 +14,9 @@ parameters:
 		processTimeout: 1200.0
 		jobSize: 50
 	level: 8
+	fileExtensions:
+		- php
+		- phpt
 	paths:
 		- src
 		- database

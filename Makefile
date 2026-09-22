@@ -20,11 +20,11 @@ db-seed:
 
 .PHONY: phpcs
 phpcs:
-	$(exec-app) vendor/bin/phpcs --standard=ruleset.xml --extensions=php $(or ${args},src tests database)
+	$(exec-app) vendor/bin/phpcs --standard=ruleset.xml --extensions=php,phpt $(or ${args},src tests database)
 
 .PHONY: phpcs-fix
 phpcs-fix:
-	$(exec-app) vendor/bin/phpcbf --standard=ruleset.xml --extensions=php $(or ${args},src tests database)
+	$(exec-app) vendor/bin/phpcbf --standard=ruleset.xml --extensions=php,phpt $(or ${args},src tests database)
 
 .PHONY: phpstan
 phpstan:
