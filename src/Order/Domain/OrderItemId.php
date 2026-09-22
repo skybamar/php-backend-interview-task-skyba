@@ -1,0 +1,25 @@
+<?php declare(strict_types=1);
+
+namespace App\Order\Domain;
+
+use App\Shared\Domain\Id\UuidId;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+
+final readonly class OrderItemId extends UuidId
+{
+	public static function generate(): self
+	{
+		return self::fromUuid(Uuid::uuid7());
+	}
+
+	public static function fromString(string $string): static
+	{
+		return new self(Uuid::fromString($string));
+	}
+
+	public static function fromUuid(UuidInterface $uuid): static
+	{
+		return new self($uuid);
+	}
+}

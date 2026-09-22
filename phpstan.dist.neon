@@ -33,6 +33,10 @@ parameters:
 
 	inferPrivatePropertyTypeFromConstructor: true
 	reportUnmatchedIgnoredErrors: false
+	ignoreErrors:
+		-
+			identifier: missingType.checkedException
+			path: tests/*
 	propertyAlwaysWrittenTags:
 		- '@@readonly' #some entity properties are filled only in DB
 	shipmonkRules:
@@ -40,4 +44,5 @@ parameters:
 		forbidCheckedExceptionInCallable:
 			allowedCheckedExceptionCallables:
 				'Doctrine\ORM\EntityManagerInterface::wrapInTransaction': [0]
+				'Tester\Assert::exception': [0]
 			enabled: true
