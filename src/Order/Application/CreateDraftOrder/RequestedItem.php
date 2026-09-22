@@ -2,13 +2,14 @@
 
 namespace App\Order\Application\CreateDraftOrder;
 
+use App\Order\Domain\Quantity;
 use App\Shared\Domain\Id\ProductId;
 
 final readonly class RequestedItem
 {
 	public function __construct(
 		public ProductId $productId,
-		public int $quantity,
+		public Quantity $quantity,
 	) {
 	}
 }

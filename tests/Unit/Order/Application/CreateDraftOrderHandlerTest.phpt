@@ -8,7 +8,7 @@ use App\Order\Application\CreateDraftOrder\RequestedItem;
 use App\Order\Application\Exception\CustomerNotFound;
 use App\Order\Application\Exception\UnknownProduct;
 use App\Order\Domain\Exception\EmptyItems;
-use App\Order\Domain\Exception\InvalidQuantity;
+use App\Order\Domain\Quantity;
 use App\Shared\Domain\Id\CustomerId;
 use App\Shared\Domain\Id\ProductId;
 use Brick\DateTime\Clock\FixedClock;
@@ -54,8 +54,8 @@ final class CreateDraftOrderHandlerTest extends TestCase
 	public function testStoresDraftWithCurrentPricesAndClockTime(): void
 	{
 		$order = $this->handler->handle(new CreateDraftOrderCommand($this->alice, [
-			new RequestedItem($this->creatine, 2),
-			new RequestedItem($this->shaker, 1),
+			new RequestedItem($this->creatine, Quantity::of(2)),
+			new RequestedItem($this->shaker, Quantity::of(1)),
 		]));
 
 		Assert::same([$order], $this->orders->added);
@@ -95,26 +95,15 @@ final class CreateDraftOrderHandlerTest extends TestCase
 
 		$exception = Assert::exception(
 			fn () => $this->handler->handle(new CreateDraftOrderCommand($this->alice, [
-				new RequestedItem($this->creatine, 1),
-				new RequestedItem($firstUnknown, 1),
-				new RequestedItem($secondUnknown, 1),
+				new RequestedItem($this->creatine, Quantity::of(1)),
+				new RequestedItem($firstUnknown, Quantity::of(1)),
+				new RequestedItem($secondUnknown, Quantity::of(1)),
 			])),
 			UnknownProduct::class,
 		);
 
 		\assert($exception instanceof UnknownProduct);
 		Assert::true($exception->productId->equals($firstUnknown));
-	}
-
-	public function testInvalidQuantityTakesPrecedenceOverUnknownProduct(): void
-	{
-		Assert::exception(
-			fn () => $this->handler->handle(new CreateDraftOrderCommand($this->alice, [
-				new RequestedItem(ProductId::generate(), 1),
-				new RequestedItem($this->creatine, 0),
-			])),
-			InvalidQuantity::class,
-		);
 	}
 }
 
