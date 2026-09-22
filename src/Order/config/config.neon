@@ -1,0 +1,5 @@
+services:
+	- App\Order\Application\CreateDraftOrder\CreateDraftOrderHandler
+	- App\Order\Infrastructure\Doctrine\DoctrineOrderRepository
+	- App\Order\Infrastructure\Dbal\DbalCustomers
+	- App\Order\Infrastructure\Dbal\DbalProductPrices

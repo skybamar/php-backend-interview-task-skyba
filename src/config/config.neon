@@ -1,6 +1,7 @@
 includes:
     - doctrine.neon
     - ./../Shared/Infrastructure/config/config.neon
+    - ./../Order/config/config.neon
 
 services:
 	- Brick\DateTime\Clock\SystemClock
