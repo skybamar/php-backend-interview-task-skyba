@@ -15,11 +15,11 @@ parameters:
 		jobSize: 50
 	level: 8
 	paths:
-		- ../app
-		- ../database
-		- ../tests
+		- src
+		- database
+		- tests
 	excludePaths:
-		- ../temp/cache/latte/* #Undefined variable: $xyz
+		- temp/*
 
 	strictRules:
 		strictArrayFilter: true

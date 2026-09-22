@@ -41,3 +41,7 @@ reset:
 	make wait-db
 	make db-migrate
 	make db-seed
+
+.PHONY: test
+test:
+	$(exec-app) vendor/bin/tester -C $(or ${args},tests)
