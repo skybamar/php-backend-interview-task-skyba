@@ -56,6 +56,8 @@ final class DoctrineIdTypeExtension extends CompilerExtension
 	 */
 	private function findIdClasses(): Generator
 	{
+		$this->loader->rebuild();
+
 		foreach (\array_keys($this->loader->getIndexedClasses()) as $class) {
 			if (\is_subclass_of($class, IdType::class, true)) {
 				if ((new ReflectionClass($class))->isAbstract()) {
