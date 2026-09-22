@@ -1,0 +1,4 @@
+services:
+	- App\Presentation\API\Order\OrderRouter
+	- App\Presentation\API\Order\CreateOrder\CreateOrderHandler
+	- App\Presentation\API\Order\CreateOrder\CreateOrderCommandFactory
